@@ -1,8 +1,17 @@
 unit Unit2;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+{$IFnDEF FPC}
+  Windows,
+{$ELSE}
+  LCLIntf, LCLType, LMessages,
+{$ENDIF}
+  Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls;
 
 function ZamenaURL( stroka :string ): string;
@@ -24,7 +33,7 @@ begin
          if poziciaq > 1
            then
              begin
-               novaaq_stroka := 'ОСТОРОЖНО!!! - ';
+               novaaq_stroka := 'РћРЎРўРћР РћР–РќРћ!!! - ';
              end
            else
              begin
@@ -47,7 +56,7 @@ var
                 :Integer;
   simvol1       :Char;
 begin
-   //заглушка Result := stroka + ' сработало!';
+   //Р·Р°РіР»СѓС€РєР° Result := stroka + ' СЃСЂР°Р±РѕС‚Р°Р»Рѕ!';
    novaaq_stroka := '';
    UdalenieHTTP( stroka, novaaq_stroka );
    VariantZameny := OpredelenieSposobaZameny( stroka );
@@ -55,7 +64,7 @@ begin
    if VariantZameny = 1
      then
        begin
-         //ShowMessage( 'первый способ замены' );
+         //ShowMessage( 'РїРµСЂРІС‹Р№ СЃРїРѕСЃРѕР± Р·Р°РјРµРЅС‹' );
          for i := 1 to dlina_stroki do
            begin
              simvol1 := stroka[ i ];
@@ -65,7 +74,7 @@ begin
        end
      else
        begin
-         //ShowMessage( 'второй способ замены' );
+         //ShowMessage( 'РІС‚РѕСЂРѕР№ СЃРїРѕСЃРѕР± Р·Р°РјРµРЅС‹' );
          for i := 1 to dlina_stroki do
            begin
              simvol1 := stroka[ i ];
